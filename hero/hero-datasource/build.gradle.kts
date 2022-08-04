@@ -1,9 +1,18 @@
-plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
+apply {
+    from("$rootDir/library-build.gradle")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+plugins {
+//    kotlin("jvm") version Kotlin.version
+    kotlin(KotlinPlugins.serialization) version Kotlin.version
+}
+
+dependencies {
+    "implementation"(project(Modules.heroDomain))
+
+    "implementation"(Ktor.android)
+    "implementation"(Ktor.clientSerialization)
+    "implementation"(Ktor.contentNegotiation)
+    "implementation"(Ktor.core)
+    "implementation"(Ktor.serializationJson)
 }

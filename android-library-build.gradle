@@ -1,0 +1,69 @@
+// build.gradle for android libraries that contain UI
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-parcelize'
+
+android {
+    compileSdkVersion Android.compileSdk
+
+    defaultConfig {
+        minSdkVersion Android.minSdk
+        targetSdkVersion Android.targetSdk
+        versionCode Android.versionCode
+        versionName Android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.version
+    }
+}
+
+dependencies {
+//    implementation AndroidX.coreKtx
+//    implementation AndroidX.appCompat
+//    implementation AndroidX.lifecycleVmKtx
+//
+//    implementation Compose.activity
+//    implementation Compose.ui
+//    implementation Compose.material
+//    implementation Compose.tooling
+//    implementation Compose.navigation
+//
+//    implementation Google.material
+//
+//    implementation Hilt.android
+//    kapt Hilt.compiler
+    implementation(Activity.compose)
+    implementation(AppCompat.core)
+    implementation(Compose.foundation)
+    implementation(Compose.material3)
+    implementation(Compose.ui)
+    implementation(Compose.uiToolingPreview)
+    implementation(Core.ktx)
+    implementation(Hilt.android)
+    implementation(Kotlin.stdLib)
+    implementation(Material.core)
+
+    testImplementation(JUnit.core)
+
+    debugImplementation(ComposeDebug.uiTestManifest)
+    debugImplementation(ComposeDebug.uiTooling)
+}
